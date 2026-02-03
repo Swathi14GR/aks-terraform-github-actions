@@ -1,0 +1,70 @@
+name: Terraform Pipeline
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'terraform/**'
+  pull_request:
+    paths:
+      - 'terraform/**'
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - uses: azure/login@v1
+      with:
+        client-id: ${{ secrets.AZURE_CLIENT_ID }}
+        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+    - uses: hashicorp/setup-terraform@v3
+    - name: Clean Terraform cache
+      run: |
+        rm -rf terraform/.terraform
+        rm -f terraform/.terraform.lock.hcl
+
+    - name: Terraform Init
+      run: terraform init 
+      working-directory: terraform
+
+    - name: Terraform Fmt
+      run: terraform fmt
+      working-directory: terraform
+
+    - name: Terraform Validate
+      run: terraform validate
+      working-directory: terraform
+
+    - name: tfsec
+      uses: aquasecurity/tfsec-action@v1.0.3
+      with:
+       working_directory: terraform
+       additional_args: --minimum-severity HIGH
+       github_token: ${{ github.token }}
+
+    - name: Trivy IaC Scan
+      uses: aquasecurity/trivy-action@0.28.0
+      with:
+        scan-type: config
+        scan-ref: terraform
+        severity: HIGH,CRITICAL
+  
+    - name: Terraform Plan
+      if: github.event_name == 'pull_request'
+      run: terraform plan
+      working-directory: terraform
+
+    - name: Terraform Apply
+      if: github.ref == 'refs/heads/main'
+      run: terraform apply -auto-approve -var-file="terraform.tfvars"
+      working-directory: terraform

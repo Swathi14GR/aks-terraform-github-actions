@@ -1,0 +1,7 @@
+
+resource "azurerm_log_analytics_workspace" "law" {
+  name                = var.law_name
+  location            = var.location
+  resource_group_name = var.rg
+  retention_in_days   = 30
+}
