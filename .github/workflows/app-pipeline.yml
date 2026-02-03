@@ -14,7 +14,7 @@ env:
   ACR_NAME: myacrname
   IMAGE_NAME: sampleapp
   AKS_CLUSTER: aks-devops
-  AKS_RG: rg-devops
+  AKS_RG: rg-devops1
 
 jobs:
   build-test-deploy:
