@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: sampleapp
-        image: myacrassignment.azurecr.io/sampleapp:IMAGE_TAG
+        image: acrprodassignmnet3.azurecr.io/sampleapp:IMAGE_TAG
         ports:
         - containerPort: 8080
         readinessProbe:
