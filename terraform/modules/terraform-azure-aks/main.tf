@@ -1,7 +1,7 @@
 resource "azurerm_kubernetes_cluster" "aks" {
   name                = var.cluster_name
   location            = var.location
-  resource_group_name = var.rg
+  resource_group_name = azurerm_resource_group.rg.name
   dns_prefix          = "aks-private"
 
   role_based_access_control_enabled = true
