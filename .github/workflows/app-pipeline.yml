@@ -12,7 +12,7 @@ permissions:
 
 env:
   ACR_NAME: myacrname
-  IMAGE_NAME: sampleapp
+  IMAGE_NAME: pyapp
   AKS_CLUSTER: aks-prod
   AKS_RG: rg-aks-prod1
 
