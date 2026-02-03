@@ -43,24 +43,24 @@ jobs:
     # Build Docker Image
     - name: Build Docker Image
       run: |
-        docker build -t $ACR_NAME.azurecr.io/$IMAGE_NAME:${{ github.sha }} app
+        docker build -t acrprodassignmnet3.azurecr.io/$IMAGE_NAME:${{ github.sha }} app
 
     # Trivy Image Scan
     - name: Trivy Image Scan
       uses: aquasecurity/trivy-action@0.28.0
       with:
-        image-ref: $ACR_NAME.azurecr.io/$IMAGE_NAME:${{ github.sha }}
+        image-ref: acrprodassignmnet3.azurecr.io/$IMAGE_NAME:${{ github.sha }}
         severity: HIGH,CRITICAL
         exit-code: '1'
 
     # Login to ACR using OIDC
     - name: ACR Login
-      run: az acr login --name $ACR_NAME
+      run: az acr login --name acrprodassignmnet3
 
     # Push Image to ACR
     - name: Push Image
       run: |
-        docker push $ACR_NAME.azurecr.io/$IMAGE_NAME:${{ github.sha }}
+        docker push acrprodassignmnet3.azurecr.io/$IMAGE_NAME:${{ github.sha }}
 
     # Get AKS credentials
     - name: Get AKS Credentials
