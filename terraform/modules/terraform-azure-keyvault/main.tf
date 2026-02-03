@@ -14,6 +14,12 @@ resource "azurerm_key_vault" "kv" {
   resource_group_name = var.rg
   tenant_id           = data.azurerm_client_config.current.tenant_id
   sku_name            = "standard"
+  network_acls {
+    default_action             = "Deny"
+    bypass                     = "AzureServices"
+    #ip_rules                   = ["10.0.0.0/24"]
+    #virtual_network_subnet_ids = []
+  }
 }
 
 resource "azurerm_key_vault_access_policy" "terraform_creator" {
