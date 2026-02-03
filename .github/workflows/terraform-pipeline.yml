@@ -38,7 +38,7 @@ jobs:
       working-directory: terraform
 
     - name: Terraform Fmt
-      run: terraform fmt
+      run: terraform fmt --check
       working-directory: terraform
 
     - name: Terraform Validate
