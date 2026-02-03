@@ -6,4 +6,6 @@ COPY . /app
 
 RUN pip install --no-cache-dir fastapi uvicorn pytest httpx
 
+ENV PYTHONPATH=/app
+
 CMD ["pytest", "tests"]
