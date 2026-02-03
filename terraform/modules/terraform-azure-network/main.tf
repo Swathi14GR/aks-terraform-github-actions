@@ -1,4 +1,9 @@
 
+resource "azurerm_resource_group" "rg" {
+  location            = var.location
+  resource_group_name = var.rg
+}
+
 resource "azurerm_virtual_network" "vnet" {
   name                = var.vnet_name
   address_space       = ["10.100.0.0/16"]
