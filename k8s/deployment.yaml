@@ -14,12 +14,12 @@ spec:
     spec:
       containers:
       - name: sampleapp
-        image: acrprodassignmnet3.azurecr.io/pyapp:IMAGE_TAG
+        image: acrprodassignmnet3.azurecr.io/pyapp:${{ github.sha }}
         ports:
-        - containerPort: 8080
+        - containerPort: 80
         readinessProbe:
           httpGet:
             path: /health
-            port: 8080
+            port: 80
           initialDelaySeconds: 10
           periodSeconds: 5
