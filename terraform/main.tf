@@ -1,15 +1,24 @@
+###############################
+# Resource Group
+###############################
 resource "azurerm_resource_group" "rg" {
   name     = var.resource_group_name
   location = var.location
 }
 
+###############################
+# Network Module
+###############################
 module "network" {
-  source   = "./modules/terraform-azure-network"
-  location = var.location
-  rg       = azurerm_resource_group.rg.name
+  source    = "./modules/terraform-azure-network"
+  location  = var.location
+  rg        = azurerm_resource_group.rg.name
   vnet_name = var.vnet_name
 }
 
+###############################
+# Log Analytics Module
+###############################
 module "loganalytics" {
   source   = "./modules/terraform-azure-loganalytics"
   location = var.location
@@ -17,6 +26,9 @@ module "loganalytics" {
   law_name = var.log_analytics_name
 }
 
+###############################
+# AKS Module
+###############################
 module "aks" {
   source           = "./modules/terraform-azure-aks"
   aks_subnet_id    = module.network.aks_subnet_id
@@ -26,6 +38,9 @@ module "aks" {
   cluster_name     = var.aks_cluster_name
 }
 
+###############################
+# Key Vault Module
+###############################
 module "keyvault" {
   source                     = "./modules/terraform-azure-keyvault"
   location                   = var.location
@@ -34,6 +49,9 @@ module "keyvault" {
   kubelet_identity_object_id = module.aks.kubelet_identity_object_id
 }
 
+###############################
+# ACR Module
+###############################
 module "acr" {
   source   = "./modules/terraform-azure-acr"
   location = var.location
