@@ -1,9 +1,13 @@
-FROM python:3.12-slim
+FROM python:3.11-slim
 
 WORKDIR /app
 
-COPY . /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-RUN pip install --no-cache-dir fastapi uvicorn pytest httpx
+COPY . .
 
-CMD ["pytest", "tests"]
+# this line is key for pytest imports
+ENV PYTHONPATH=/app
+
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "80"]
