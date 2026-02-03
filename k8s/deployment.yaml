@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: sampleapp
-        image: acrprodassignmnet3.azurecr.io/pyapp:${{ github.sha }}
+        image: acrprodassignmnet3.azurecr.io/pyapp:IMAGE_TAG
         ports:
         - containerPort: 80
         readinessProbe:
