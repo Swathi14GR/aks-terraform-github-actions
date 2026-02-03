@@ -12,7 +12,7 @@ resource "azurerm_resource_group" "rg" {
 module "network" {
   source    = "./modules/terraform-azure-network"
   location  = var.location
-  rg        = azurerm_resource_group.rg.name
+  rg        = module.rg.name
   vnet_name = var.vnet_name
 }
 
@@ -22,7 +22,7 @@ module "network" {
 module "loganalytics" {
   source   = "./modules/terraform-azure-loganalytics"
   location = var.location
-  rg       = azurerm_resource_group.rg.name
+  rg       = module.rg.name
   law_name = var.log_analytics_name
 }
 
@@ -34,7 +34,7 @@ module "aks" {
   aks_subnet_id    = module.network.aks_subnet_id
   log_analytics_id = module.loganalytics.id
   location         = var.location
-  rg               = azurerm_resource_group.rg.name
+  rg               = module.rg.name
   cluster_name     = var.aks_cluster_name
 }
 
@@ -44,7 +44,7 @@ module "aks" {
 module "keyvault" {
   source                     = "./modules/terraform-azure-keyvault"
   location                   = var.location
-  rg                         = azurerm_resource_group.rg.name
+  rg                         = module.rg.name
   key_vault_name             = var.key_vault_name
   kubelet_identity_object_id = module.aks.kubelet_identity_object_id
 }
@@ -55,6 +55,6 @@ module "keyvault" {
 module "acr" {
   source   = "./modules/terraform-azure-acr"
   location = var.location
-  rg       = azurerm_resource_group.rg.name
+  rg       = module.rg.name
   acr_name = var.acr_name
 }
