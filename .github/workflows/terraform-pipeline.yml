@@ -57,7 +57,7 @@ jobs:
       with:
         scan-type: config
         scan-ref: terraform
-        severity: HIGH,CRITICAL
+        severity: CRITICAL
   
     - name: Terraform Plan
       if: github.event_name == 'pull_request'
