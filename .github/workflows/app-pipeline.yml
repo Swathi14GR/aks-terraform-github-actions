@@ -73,7 +73,7 @@ jobs:
     # Deploy to AKS
     - name: Deploy to AKS
       run: |
-        sed -i "s|IMAGE_TAG|${{ github.sha }}|g" app/k8s/deployment.yaml
+        sed -i "s|IMAGE_TAG|${{ github.sha }}|g" k8s/deployment.yaml
         kubectl apply -f k8s/
 
     # Health Check
