@@ -13,8 +13,8 @@ permissions:
 env:
   ACR_NAME: myacrname
   IMAGE_NAME: sampleapp
-  AKS_CLUSTER: aks-devops
-  AKS_RG: rg-devops1
+  AKS_CLUSTER: aks-prod
+  AKS_RG: rg-aks-prod1
 
 jobs:
   build-test-deploy:
