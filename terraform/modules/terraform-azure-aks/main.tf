@@ -1,12 +1,11 @@
-
 resource "azurerm_kubernetes_cluster" "aks" {
   name                = var.cluster_name
   location            = var.location
   resource_group_name = var.rg
   dns_prefix          = "aks-private"
-  #sku_tier ="Free"
-  #kubernetes_version  = "1.28"  
-  private_cluster_enabled = true
+
+  role_based_access_control_enabled = true
+  private_cluster_enabled           = true
 
   default_node_pool {
     name           = "system"
@@ -21,9 +20,12 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
   network_profile {
     network_plugin = "azure"
+    network_policy = "azure"
+    service_cidr   = "10.1.0.0/16"
+    dns_service_ip = "10.1.0.10"
   }
 
   oms_agent {
-    log_analytics_workspace_id = var.log_analytics_id
+    log_analytics_workspace_id = azurerm_log_analytics_workspace.law.id
   }
 }
