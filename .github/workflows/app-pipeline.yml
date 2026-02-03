@@ -74,7 +74,7 @@ jobs:
     - name: Deploy to AKS
       run: |
         sed -i "s|IMAGE_TAG|${{ github.sha }}|g" app/k8s/deployment.yaml
-        kubectl apply -f app/k8s/
+        kubectl apply -f k8s/
 
     # Health Check
     - name: Wait for Pods
