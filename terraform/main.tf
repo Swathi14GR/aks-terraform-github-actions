@@ -1,11 +1,11 @@
 ###############################
 # Resource Group
 ###############################
-resource "azurerm_resource_group" "rg" {
+module "rg" {
+  source   = "./modules/terraform-azure-rg"
   name     = var.resource_group_name
   location = var.location
 }
-
 ###############################
 # Network Module
 ###############################

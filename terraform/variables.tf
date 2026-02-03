@@ -38,3 +38,4 @@ variable "vnet_name" {
   description = "vnet_name"
   type        = string
 }
+
