@@ -11,7 +11,7 @@ permissions:
   contents: read
 
 env:
-  ACR_NAME: myacrname
+  ACR_NAME: acrprodassignmnet3
   IMAGE_NAME: pyapp
   AKS_CLUSTER: aks-prod
   AKS_RG: rg-aks-prod1
@@ -44,24 +44,24 @@ jobs:
     # Build Docker Image
     - name: Build Docker Image
       run: |
-        docker build -t acrprodassignmnet3.azurecr.io/pyapp:${{ github.sha }} app
+        docker build -t $ACR_NAME.azurecr.io/pyapp:${{ github.sha }} app
 
     # Trivy Image Scan
     - name: Trivy Image Scan
       uses: aquasecurity/trivy-action@0.28.0
       with:
-        image-ref: acrprodassignmnet3.azurecr.io/pyapp:${{ github.sha }}
+        image-ref: $ACR_NAME.azurecr.io/pyapp:${{ github.sha }}
         severity: CRITICAL
         exit-code: '1'
 
     # Login to ACR using OIDC
     - name: ACR Login
-      run: az acr login --name acrprodassignmnet3
+      run: az acr login --name $ACR_NAME
 
     # Push Image to ACR
     - name: Push Image
       run: |
-        docker push acrprodassignmnet3.azurecr.io/pyapp:${{ github.sha }}
+        docker push $ACR_NAME.azurecr.io/pyapp:${{ github.sha }}
 
     # Get AKS credentials
     - name: Get AKS Credentials
