@@ -2,7 +2,7 @@ resource "azurerm_container_registry" "acr" {
   name                = var.acr_name
   resource_group_name = var.rg
   location            = var.location
-  sku                 = "Standard"
+  sku                 = "Premium"
   admin_enabled       = false
 }
 
