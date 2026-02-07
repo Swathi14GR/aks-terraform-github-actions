@@ -9,3 +9,6 @@ variable "location" {
 variable "rg" {
   type = string
 }
+variable "tags" {
+  type = map(string)
+}

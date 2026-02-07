@@ -12,3 +12,10 @@ variable "rg" {
 variable "kubelet_identity_object_id" {
   type = string
 }
+variable "tags" {
+  type = map(string)
+}
+variable "payment_gateway_api_key" {
+  type      = string
+  sensitive = true
+}
