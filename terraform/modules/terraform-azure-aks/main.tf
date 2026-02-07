@@ -7,7 +7,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
   role_based_access_control_enabled = true
   private_cluster_enabled           = true
-  private_dns_zone_id               = system
+  private_dns_zone_id               = "System"
 
   default_node_pool {
     name           = "system"
