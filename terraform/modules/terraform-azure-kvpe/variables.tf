@@ -18,7 +18,7 @@ variable "location" {
   type        = string
 }
 
-variable "vnet_id" {
+variable "runner_vnet_id" {
   type        = string
   description = "VNet ID to link the Private DNS Zone"
 }

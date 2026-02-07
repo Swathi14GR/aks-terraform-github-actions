@@ -14,7 +14,7 @@ resource "azurerm_private_dns_zone_virtual_network_link" "kv_dns_link" {
   name                  = "${var.kv_name}-vnetlink"
   resource_group_name   = var.rg
   private_dns_zone_name = azurerm_private_dns_zone.kv_dns.name
-  virtual_network_id    = var.vnet_id
+  virtual_network_id    = var.runner_vnet_id
   registration_enabled  = false
   tags                  = var.tags
 }
