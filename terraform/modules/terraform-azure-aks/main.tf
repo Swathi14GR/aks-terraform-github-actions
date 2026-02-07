@@ -15,7 +15,7 @@ resource "azurerm_private_dns_zone_virtual_network_link" "aks_dns_link_runner" {
 
   depends_on = [
   azurerm_private_dns_zone.aks_dns
-  
+  ]
 }
 
 resource "azurerm_kubernetes_cluster" "aks" {
