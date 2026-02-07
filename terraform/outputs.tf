@@ -9,4 +9,7 @@ output "acr_login_server" {
 output "key_vault_uri" {
   value = module.keyvault.uri
 }
+output "root_tags" {
+  value = local.tags
+}
 

@@ -39,3 +39,19 @@ variable "vnet_name" {
   type        = string
 }
 
+variable "vm_size" {
+  description = "VM size"
+  type        = string
+}
+
+variable "common_tags" {
+  description = "Tags applied to all resources"
+  type        = map(string)
+  default     = {}
+}
+
+variable "payment_gateway_api_key" {
+  description = "API key for payment gateway"
+  type        = string
+  sensitive   = true
+}
