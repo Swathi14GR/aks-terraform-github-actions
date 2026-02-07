@@ -11,10 +11,10 @@ permissions:
   contents: read
 
 env:
-  ACR_NAME: acrprodassignmnet3
+  ACR_NAME: acrprodassignmnet4
   IMAGE_NAME: pyapp
   AKS_CLUSTER: aks-prod
-  AKS_RG: rg-aks-prod1
+  AKS_RG: rg-aks-prod-demo
 
 jobs:
   build-test-deploy:
