@@ -12,6 +12,10 @@ resource "azurerm_private_dns_zone_virtual_network_link" "aks_dns_link_runner" {
   resource_group_name   = data.azurerm_private_dns_zone.aks_system_zone.resource_group_name
   private_dns_zone_name = data.azurerm_private_dns_zone.aks_system_zone.name
   virtual_network_id    = data.azurerm_virtual_network.runner.id
+
+  depends_on = [
+  azurerm_private_dns_zone.aks_dns
+  
 }
 
 resource "azurerm_kubernetes_cluster" "aks" {
