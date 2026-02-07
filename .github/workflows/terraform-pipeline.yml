@@ -15,7 +15,7 @@ permissions:
 
 jobs:
   terraform:
-    runs-on: [self-hosted, aks]
+    runs-on: ubuntu-latest
     environment: production
 
     steps:
