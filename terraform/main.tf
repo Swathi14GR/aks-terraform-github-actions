@@ -51,7 +51,7 @@ module "keyvault" {
   rg                         = module.resourcegroup.name
   key_vault_name             = var.key_vault_name
   kubelet_identity_object_id = module.aks.kubelet_identity_object_id
-   payment_gateway_api_key   = var.payment_gateway_api_key
+  payment_gateway_api_key    = var.payment_gateway_api_key
   tags                       = local.tags
 }
 

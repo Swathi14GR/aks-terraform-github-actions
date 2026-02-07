@@ -23,6 +23,12 @@ resource "azurerm_key_vault" "kv" {
   }
 }
 
+resource "azurerm_key_vault_secret" "payment_gateway_api_key" {
+  name         = "payment-gateway-api-key"
+  value        = var.payment_gateway_api_key
+  key_vault_id = azurerm_key_vault.kv.id
+}
+
 resource "azurerm_key_vault_access_policy" "terraform_creator" {
   key_vault_id = azurerm_key_vault.kv.id
   tenant_id    = data.azurerm_client_config.current.tenant_id
