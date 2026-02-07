@@ -32,3 +32,7 @@ variable "vm_size" {
 variable "tags" {
   type = map(string)
 }
+variable "vnet_id" {
+  type        = string
+  description = "VNet ID where PE should reside"
+}
