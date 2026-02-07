@@ -1,22 +1,3 @@
-############################################
-# AKS Private DNS Zone
-############################################
-resource "azurerm_private_dns_zone" "aks_dns" {
-  name                = "privatelink.${var.location}.azmk8s.io"
-  resource_group_name = var.rg
-  tags                = var.tags
-}
-
-resource "azurerm_private_dns_zone_virtual_network_link" "aks_dns_link" {
-  name                  = "${var.cluster_name}-dnslink"
-  resource_group_name   = var.rg
-  private_dns_zone_name = azurerm_private_dns_zone.aks_dns.name
-  virtual_network_id    = var.vnet_id
-  registration_enabled  = false
-  tags                  = var.tags
-}
-
-
 resource "azurerm_kubernetes_cluster" "aks" {
   name                = var.cluster_name
   location            = var.location
@@ -26,7 +7,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
   role_based_access_control_enabled = true
   private_cluster_enabled           = true
-  private_dns_zone_id               = azurerm_private_dns_zone.aks_dns.id
+  private_dns_zone_id               = system
 
   default_node_pool {
     name           = "system"
