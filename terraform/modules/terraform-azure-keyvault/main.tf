@@ -27,6 +27,10 @@ resource "azurerm_key_vault_secret" "payment_gateway_api_key" {
   name         = "payment-gateway-api-key"
   value        = var.payment_gateway_api_key
   key_vault_id = azurerm_key_vault.kv.id
+
+  depends_on = [
+    azurerm_key_vault_access_policy.terraform_creator
+  ]
 }
 
 resource "azurerm_key_vault_access_policy" "terraform_creator" {
