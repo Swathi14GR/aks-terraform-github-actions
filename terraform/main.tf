@@ -88,13 +88,13 @@ module "acr_pe" {
 module "keyvault_pe" {
   source    = "./modules/terraform-azure-kvpe"
 
-  kv_id     = module.keyvault.id
-  kv_name   = var.key_vault_name
-  rg        = module.resourcegroup.name
-  location  = var.location
+  kv_id             = module.keyvault.id
+  kv_name           = var.key_vault_name
+  rg                = module.resourcegroup.name
+  location          = var.location
 
-  subnet_id = module.network.services_subnet_id
-  vnet_id   = module.network.vnet_id
+  services_subnet_id = module.network.services_subnet_id
+  vnet_id            = module.network.vnet_id
 
-  tags      = local.tags
+  tags               = local.tags
 }

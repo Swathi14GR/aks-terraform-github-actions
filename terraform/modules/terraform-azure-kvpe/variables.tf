@@ -1,4 +1,4 @@
-variable "key_vault_id" {
+variable "kv_id" {
   description = "Key Vault resource ID"
   type        = string
 }
