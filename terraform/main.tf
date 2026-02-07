@@ -1,19 +1,10 @@
 ###############################
-# Resource Group
-###############################
-module "resourcegroup" {
-  source   = "./modules/terraform-azure-rg"
-  rg       = var.resource_group_name
-  location = var.location
-  tags     = local.tags
-}
-###############################
 # Network Module
 ###############################
 module "network" {
   source    = "./modules/terraform-azure-network"
   location  = var.location
-  rg        = module.resourcegroup.name
+  rg        = var.resource_group_name
   vnet_name = var.vnet_name
   tags     = local.tags
 }
@@ -24,7 +15,7 @@ module "network" {
 module "loganalytics" {
   source   = "./modules/terraform-azure-loganalytics"
   location = var.location
-  rg       = module.resourcegroup.name
+  rg       = var.resource_group_name
   law_name = var.log_analytics_name
   tags     = local.tags
 }
@@ -38,10 +29,9 @@ module "aks" {
   vnet_id          = module.network.vnet_id
   log_analytics_id = module.loganalytics.id
   location         = var.location
-  rg               = module.resourcegroup.name
+  rg               = var.resource_group_name
   cluster_name     = var.aks_cluster_name
   tags             = local.tags
-  runner_vnet_name = var.runner_vnet_name 
 }
 
 ###############################
@@ -50,7 +40,7 @@ module "aks" {
 module "keyvault" {
   source                     = "./modules/terraform-azure-keyvault"
   location                   = var.location
-  rg                         = module.resourcegroup.name
+  rg                         = var.resource_group_name
   key_vault_name             = var.key_vault_name
   kubelet_identity_object_id = module.aks.kubelet_identity_object_id
   payment_gateway_api_key    = var.payment_gateway_api_key
@@ -63,7 +53,7 @@ module "keyvault" {
 module "acr" {
   source   = "./modules/terraform-azure-acr"
   location = var.location
-  rg       = module.resourcegroup.name
+  rg       = var.resource_group_name
   acr_name = var.acr_name
   tags     = local.tags
 }
@@ -76,7 +66,7 @@ module "acr_pe" {
   source             = "./modules/terraform-azure-acrpe"
   id                 = module.acr.id
   acr_name           = var.acr_name
-  rg                 = module.resourcegroup.name
+  rg                 = var.resource_group_name
   location           = var.location
   vnet_id            = module.network.vnet_id
   services_subnet_id = module.network.services_subnet_id
@@ -91,7 +81,7 @@ module "keyvault_pe" {
   source             = "./modules/terraform-azure-kvpe"
   kv_id              = module.keyvault.id
   kv_name            = var.key_vault_name
-  rg                 = module.resourcegroup.name
+  rg                 = var.resource_group_name
   location           = var.location
   runner_vnet_name   = var.runner_vnet_name 
   services_subnet_id = module.network.services_subnet_id

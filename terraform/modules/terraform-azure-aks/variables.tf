@@ -36,7 +36,3 @@ variable "vnet_id" {
   type        = string
   description = "VNet ID where PE should reside"
 }
-variable "runner_vnet_name" {
-  type        = string
-  description = "VNet ID to link the Private DNS Zone"
-}
