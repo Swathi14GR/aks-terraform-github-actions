@@ -44,6 +44,7 @@ module "keyvault" {
   key_vault_name             = var.key_vault_name
   kubelet_identity_object_id = module.aks.kubelet_identity_object_id
   payment_gateway_api_key    = var.payment_gateway_api_key
+  database_connection_string = var.database_connection_string
   tags                       = local.tags
 }
 
