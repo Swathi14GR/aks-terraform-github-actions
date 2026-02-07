@@ -95,6 +95,5 @@ module "keyvault_pe" {
   location           = var.location
   runner_vnet_name   = var.runner_vnet_name 
   services_subnet_id = module.network.services_subnet_id
-  vnet_id            = module.network.vnet_id
   tags               = local.tags
 }
