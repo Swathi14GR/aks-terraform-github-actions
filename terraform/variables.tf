@@ -59,3 +59,8 @@ variable "runner_vnet_name" {
   type        = string
   description = "VNet ID to link the Private DNS Zone"
 }
+variable "database_connection_string" {
+  description = "API key for database connection"
+  type        = string
+  sensitive   = true
+}

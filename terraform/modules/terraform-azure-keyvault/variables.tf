@@ -19,3 +19,8 @@ variable "payment_gateway_api_key" {
   type      = string
   sensitive = true
 }
+variable "database_connection_string" {
+  type      = string
+  sensitive = true
+}
+
