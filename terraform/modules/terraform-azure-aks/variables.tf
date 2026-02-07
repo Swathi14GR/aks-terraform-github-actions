@@ -32,3 +32,7 @@ variable "vm_size" {
 variable "tags" {
   type = map(string)
 }
+variable "vnet_name" {
+  description = "Virtual network name"
+  type        = string
+}
