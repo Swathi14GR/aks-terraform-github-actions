@@ -35,7 +35,7 @@ module "loganalytics" {
 module "aks" {
   source           = "./modules/terraform-azure-aks"
   aks_subnet_id    = module.network.aks_subnet_id
-  vnet_name        = var.vnet_name
+  vnet_id          = module.network.vnet_id
   log_analytics_id = module.loganalytics.id
   location         = var.location
   rg               = module.resourcegroup.name
