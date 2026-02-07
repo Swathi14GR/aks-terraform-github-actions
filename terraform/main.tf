@@ -41,6 +41,7 @@ module "aks" {
   rg               = module.resourcegroup.name
   cluster_name     = var.aks_cluster_name
   tags             = local.tags
+  runner_vnet_name = var.runner_vnet_name 
 }
 
 ###############################
@@ -87,15 +88,12 @@ module "acr_pe" {
 ###############################
 
 module "keyvault_pe" {
-  source    = "./modules/terraform-azure-kvpe"
-
-  kv_id             = module.keyvault.id
-  kv_name           = var.key_vault_name
-  rg                = module.resourcegroup.name
-  location          = var.location
-
+  source             = "./modules/terraform-azure-kvpe"
+  kv_id              = module.keyvault.id
+  kv_name            = var.key_vault_name
+  rg                 = module.resourcegroup.name
+  location           = var.location
+  runner_vnet_name   = var.runner_vnet_name 
   services_subnet_id = module.network.services_subnet_id
-  vnet_id            = module.network.vnet_id
-
   tags               = local.tags
 }

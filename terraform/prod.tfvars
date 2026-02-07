@@ -6,7 +6,7 @@ acr_name            = "acrprodassignmnet4"
 key_vault_name      = "kv-prod-1234-demo"
 log_analytics_name  = "law-prod"
 vm_size             = "standard_d8_v3"
-
+runner_vnet_name    = "vnet-eastus"
 
 common_tags = {
   project    = "aks-demo"

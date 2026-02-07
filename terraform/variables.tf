@@ -55,3 +55,7 @@ variable "payment_gateway_api_key" {
   type        = string
   sensitive   = true
 }
+variable "runner_vnet_name" {
+  type        = string
+  description = "VNet ID to link the Private DNS Zone"
+}
