@@ -1,13 +1,4 @@
 ###############################
-# Resource Group
-###############################
-module "resourcegroup" {
-  source   = "./modules/terraform-azure-rg"
-  rg       = var.resource_group_name
-  location = var.location
-  tags     = local.tags
-}
-###############################
 # Network Module
 ###############################
 module "network" {
@@ -41,7 +32,6 @@ module "aks" {
   rg               = module.resourcegroup.name
   cluster_name     = var.aks_cluster_name
   tags             = local.tags
-  runner_vnet_name = var.runner_vnet_name 
 }
 
 ###############################

@@ -1,4 +1,4 @@
-resource_group_name = "rg-aks-prod-demo"
+resource_group_name = "rg-aks-demo"
 environment         = "prod"
 vnet_name           = "my-vnet"
 aks_cluster_name    = "aks-prod"
