@@ -18,7 +18,7 @@ resource "azurerm_key_vault" "kv" {
   network_acls {
     default_action             = "Deny"
     bypass                     = "AzureServices"
-    #ip_rules                   = ["10.0.0.0/24"]
+    ip_rules                   = ["48.217.84.35"]
     #virtual_network_subnet_ids = []
   }
 }
@@ -28,11 +28,19 @@ resource "azurerm_key_vault_secret" "payment_gateway_api_key" {
   value        = var.payment_gateway_api_key
   key_vault_id = azurerm_key_vault.kv.id
 
-  depends_on = [
+  depends_on   = [
     azurerm_key_vault_access_policy.terraform_creator
   ]
 }
 
+resource "azurerm_key_vault_secret" "database_connection_string" {
+  name         = "database-connection-string"
+  value        = var.database_connection_string
+  key_vault_id = azurerm_key_vault.kv.id
+  depends_on   = [
+    azurerm_key_vault_access_policy.terraform_creator
+  ]
+}
 resource "azurerm_key_vault_access_policy" "terraform_creator" {
   key_vault_id = azurerm_key_vault.kv.id
   tenant_id    = data.azurerm_client_config.current.tenant_id
