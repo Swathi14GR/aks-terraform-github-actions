@@ -2,23 +2,16 @@ data "azurerm_virtual_network" "runner" {
   name                = var.runner_vnet_name
   resource_group_name = var.rg
 }
-
-############################################
-# AKS Private DNS Zone
-############################################
-resource "azurerm_private_dns_zone" "aks_dns" {
+data "azurerm_private_dns_zone" "aks_system_zone" {
   name                = "privatelink.${var.location}.azmk8s.io"
-  resource_group_name = var.rg
-  tags                = var.tags
+  resource_group_name = var.rg 
 }
 
-resource "azurerm_private_dns_zone_virtual_network_link" "aks_dns_link" {
-  name                  = "${var.cluster_name}-dnslink"
-  resource_group_name   = var.rg
-  private_dns_zone_name = azurerm_private_dns_zone.aks_dns.name
+resource "azurerm_private_dns_zone_virtual_network_link" "aks_dns_link_runner" {
+  name                  = "${var.cluster_name}-runner-dnslink"
+  resource_group_name   = data.azurerm_private_dns_zone.aks_system_zone.resource_group_name
+  private_dns_zone_name = data.azurerm_private_dns_zone.aks_system_zone.name
   virtual_network_id    = data.azurerm_virtual_network.runner.id
-  registration_enabled  = false
-  tags                  = var.tags
 }
 
 resource "azurerm_kubernetes_cluster" "aks" {
@@ -30,7 +23,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
   role_based_access_control_enabled = true
   private_cluster_enabled           = true
-  #private_dns_zone_id               = "System"
+  private_dns_zone_id               = "System"
 
   default_node_pool {
     name           = "system"
