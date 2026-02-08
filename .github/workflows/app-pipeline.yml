@@ -11,7 +11,7 @@ permissions:
   contents: read
 
 env:
-  ACR_NAME: acrprodassignmnet5
+  ACR_NAME: acrprodassignmnet6
   IMAGE_NAME: pyapp
   AKS_CLUSTER: aks-prod
   AKS_RG: rg-aks-demo
