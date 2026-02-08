@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: sampleapp
-        image: acrprodassignmnet5.azurecr.io/pyapp:IMAGE_TAG
+        image: acrprodassignmnet6.azurecr.io/pyapp:IMAGE_TAG
         ports:
         - containerPort: 80
         readinessProbe:
