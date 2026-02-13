@@ -1,15 +1,14 @@
 FROM python:3.11-slim-bookworm
-
 RUN python -m pip install --upgrade --no-cache-dir pip \
  && python -m pip install --upgrade --no-cache-dir wheel==0.46.2 \
  && python -m pip install --upgrade --no-cache-dir jaraco.context==6.1.0
-
+ 
 WORKDIR /app
 
 RUN apt-get update \
  && apt-get upgrade -y \
  && rm -rf /var/lib/apt/lists/*
-RUN pip install --no-cache-dir --upgrade pip wheel
+#RUN pip install --no-cache-dir --upgrade pip wheel
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
