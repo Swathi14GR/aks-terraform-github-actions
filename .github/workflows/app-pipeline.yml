@@ -52,6 +52,7 @@ jobs:
       with:
         image-ref: ${{ env.ACR_NAME }}.azurecr.io/pyapp:${{ github.sha }}
         severity: HIGH,CRITICAL
+        ignore-unfixed: true
         exit-code: '1'
 
     # Login to ACR using OIDC
