@@ -44,7 +44,7 @@ jobs:
     # Build Docker Image
     - name: Build Docker Image
       run: |
-        docker build -t $ACR_NAME.azurecr.io/pyapp:${{ github.sha }} app
+        docker build --no-cache -t $ACR_NAME.azurecr.io/pyapp:${{ github.sha }} app
 
     # Trivy Image Scan
     - name: Trivy Image Scan

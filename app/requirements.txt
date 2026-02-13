@@ -3,3 +3,4 @@ uvicorn[standard]
 pytest
 httpx
 jaraco.context>=6.1.0
+wheel>=0.44.6
