@@ -1,7 +1,7 @@
 FROM python:3.11-slim-bookworm
 RUN python -m pip install --upgrade --no-cache-dir pip \
- && python -m pip install --upgrade --no-cache-dir wheel==0.46.2 \
- && python -m pip install --upgrade --no-cache-dir jaraco.context==6.1.0
+ && python -m pip install --upgrade --no-cache-dir --force-reinstall wheel==0.46.2 \
+ && python -m pip install --upgrade --no-cache-dir --force-reinstall jaraco.context==6.1.0
  
 WORKDIR /app
 
